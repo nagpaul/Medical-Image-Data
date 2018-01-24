@@ -1,5 +1,12 @@
 # Dicom Images of Hearts and Contours
-
+## Requirements 
+    - python 3
+        - pandas
+        - numpy
+        - dicom
+        - matplotlib
+        - PIL
+    
 
 ## Files
     - data_loader.py 
@@ -7,7 +14,7 @@
     - dicom_contour_matcher.py 
     - test_dicom_contour_matcher.py
 
-### What do they do? (and Usage)
+### Usage
     - data_loader.py containts the DataLoader class whose objects take in file paths to dicom and contourfiles directories and produce a dataset. 
         usage: 
             - dl = data_loader.DataLoader(dicom_path, contour_path, link_file_path)
@@ -24,6 +31,7 @@
         - To test a file run: 
             python test_file.py
 
-For more information, please refer to the write up(write_up.pdf) and jupyter notebook titled 'Exploratory Analysis'in the nbs folder (added 'final_data' folder to the home directory to run the notebook). 
-
-Needs Python3 to run.
+## Supplements 
+For more information, please refer to:
+    - the write up(write_up.pdf) 
+    - the jupyter notebook titled 'Exploratory Analysis'in the nbs folder (added 'final_data' folder to the home directory to run the notebook). 
