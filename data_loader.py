@@ -8,7 +8,7 @@ from dicom_contour_matcher import *
 np.random.seed(42)
 
 class DataLoader(object):
-    """docstring for DataLoader"""
+    """DataLoader class takes paths and provides functionality to load data and provides a generator for batches"""
     def __init__(self, dicom_path, contour_path, link_file_path):
         self.dicom_path = dicom_path
         self.contour_path = contour_path
@@ -17,6 +17,9 @@ class DataLoader(object):
 
 
     def _get_data_from_matcher(self):
+        """
+        Cross references data to find matching image/contour pairs and stores it in a dataframe.
+        """
         dcm = DicomContourMatcher(self.dicom_path,self.contour_path, self.link_file_path)
         data_file_tuples = dcm.process_data()
         df = pd.DataFrame(columns = ['_dicom', "_contour"])
@@ -25,18 +28,12 @@ class DataLoader(object):
 
         self.filepaths_df = df
 
-    def batch_generator(self, batch_size, shuffle = True):
-        """
-            gen = batch_generator(5)
-            for imgs,masks in gen:
-            print(imgs.shape)
-        """
-        
+    def batch_generator(self, batch_size, shuffle = True):    
         dataset_size = len(self.filepaths_df)
         list_of_indices = list(range(dataset_size))
         if shuffle==True:
             random.shuffle(list_of_indices)
-        
+        #If the batch size is not a perfect divisor of the dataset length, the last batch is left out. 
         while (len(list_of_indices)>=batch_size):
             use_values = list_of_indices[:batch_size]
             del list_of_indices[:batch_size]
